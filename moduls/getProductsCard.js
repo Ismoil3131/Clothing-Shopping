@@ -1,3 +1,4 @@
+import { addToCard } from "./addToCard.js";
 import { getCategory } from "./getCategory.js";
 
 const cardWrapper = document.querySelector('.card-wrapper');
@@ -12,6 +13,7 @@ const getProductsCard = async ()=> {
 
         const products = await response.json();
         renderProducts(products);
+        addToCard();
     } catch (error) {
         console.error('Ошибка при загрузке товаров:', error);
 
@@ -29,26 +31,23 @@ const getProductsCard = async ()=> {
 const renderProducts = (products) => {
     if (!cardWrapper) return;
 
-    cardWrapper.innerHTML = products.map((product) => {
-        const { title, price, description ,rating, image, category } = product;
-
-        return `
-            <div class="card">
-                <span id= "product-category">${category}</span>
-                <img src="${image}" alt="${title}">
-                <div class="card-info-wraper">
-                    <div class="card-info">
-                        <h2>${title}</h2>
-                        <p> Rating ${rating.rate} </p>
-                        <span>$${price}</span>
-                    </div>
-                    <button type="submit" class= "add-to-cart"><i class="bi bi-cart2"></i>Add to cart</button>
+    cardWrapper.innerHTML = products.map((product) => `
+        <div class="card">
+            <span id="product-category">${product.category || ''}</span>
+            <img src="${product.image}" alt="${product.title}">
+            <div class="card-info-wraper">
+                <div class="card-info">
+                    <h2>${product.title}</h2>
+                    <span>$${product.price}</span>
                 </div>
+                <button type="button" class="add-to-cart-btn" data-id="${product.id}">
+                    <i class="bi bi-cart2"></i> Add to cart
+                </button>
             </div>
-        `;
-    }).join('');
+        </div>
+    `).join('');
 };
-
+    
 export {
     getProductsCard
 }

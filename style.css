@@ -271,6 +271,8 @@ body {
     }
 
     .order-amount {
+        position:sticky;
+        bottom: ;
         display: flex;
         flex-direction: column;
         border-top: 1px solid rgb(225, 225, 225);
@@ -433,7 +435,7 @@ body {
         margin: 15px;
         width: 90%;
 
-        .add-to-cart {
+        .add-to-cart-btn {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -445,11 +447,6 @@ body {
             color: #ffffff;
             transition: 0.2s all ease-in-out;
             
-        }
-
-        .add-to-cart:hover{
-            background-color: #1c1c1c;
-
         }
     }
 
@@ -564,6 +561,23 @@ body {
 
         li:hover {
             transform: translateY(-3px);
+        }
+        
+        .bi{
+            transition: 0.2s all ease-in-out;
+        }
+        .bi:hover {
+            color: #000000;
+            
+        }
+        .bi-instagram {
+            color: #b51818;
+        }
+        .bi-facebook {
+            color: #140584;
+        }
+        .bi-whatsapp {
+            color: #036c16;
         }
     }
 }

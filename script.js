@@ -1,9 +1,10 @@
-import { addToProduct } from "./moduls/addToCard.js";
+import { addToCard } from "./moduls/addToCard.js";
 import { getProductsCard } from "./moduls/getProductsCard.js";
 import { getCategory } from "./moduls/getCategory.js";
 
 window.addEventListener('DOMContentLoaded', ()=> {
     getProductsCard()
+    // addToCard()
 })
 
 
