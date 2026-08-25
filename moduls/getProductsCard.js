@@ -12,9 +12,13 @@ const getProductsCard = async ()=> {
         }
 
         const products = await response.json();
+
+        localStorage.setItem('products', JSON.stringify(products))
         renderProducts(products);
-        addToCard();
+        addToCard(products);
+
     } catch (error) {
+        products = JSON.parse(localStorage.getItem('products')) || [];
         console.error('Ошибка при загрузке товаров:', error);
 
         if (cardWrapper) {
@@ -38,6 +42,7 @@ const renderProducts = (products) => {
             <div class="card-info-wraper">
                 <div class="card-info">
                     <h2>${product.title}</h2>
+                    <span id = "rating"></span>
                     <span>$${product.price}</span>
                 </div>
                 <button type="button" class="add-to-cart-btn" data-id="${product.id}">
