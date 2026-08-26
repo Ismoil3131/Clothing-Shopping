@@ -1,32 +1,77 @@
-import { getProductsCard } from "./getProductsCard.js"
-
-const cart = []
-
-const addToCartBtn = document.querySelector('.add-to-cart')
+const cart = [];
 const orders = document.querySelector('.orders')
-const cardWrapper = document.querySelector('.card-wrapper')
+const cardWrapper= document.querySelector('.card-wrapper')
+const orderCount = document.querySelector('.order-count')
+let products = [];
 
-const addToCard = () => {
-   cardWrapper.addEventListener('click', (event) =>{
-    const button = cardWrapper.closest('.add-to-card-btn')
-    if (!button) return;
+const addToCard = (products = []) => {
+    cardWrapper.addEventListener('click', (event) =>{
+        const button = event.target.closest('.add-to-cart-btn')
+        
+        
 
-    const productId = Number(button.dataset.id);
-    const product = product.find(item =>item.id = productId);
+        if (!button) return;
 
-    if (productId){
-        cart.push(product);
-        renderCart(orders)
-    }
-})
+        const productId = Number(button.dataset.id);
+        const product = products.find(item =>item.id == productId);
+
+        if (productId){
+            cart.push(product);
+            renderCart(orders)
+            amountOrder();
+            
+        }
+    });
+
+    orders.addEventListener('click', (e) => {
+        const orderEl = e.target.closest('.order');
+        if (!orderEl) return;
+
+        const productId = Number(orderEl.dataset.id);
+
+        if (e.target.closest('.increment')) {
+            const item = cart.find(p => p.id === productId);
+            if (item) item.count += 1;
+        } 
+        else if (e.target.closest('.decrement')) {
+            const item = cart.find(p => p.id === productId);
+            if (item && item.count > 1) {
+                item.count -= 1;
+            } else {
+                cart = cart.filter(p => p.id !== productId);
+            }
+        } 
+        else if (e.target.closest('#delete')) {
+            cart = cart.filter(p => p.id !== productId);
+        }
+
+        renderCart(orders);
+        amountOrder();
+    });
 }
 
-const renderCart = (orderContainer) => {
-    orderContainer.innerHTML = cart.map(item =>` <div class="order">
-            <img src="${item.image}" alt="${item.title}">
+const amountOrder = () => {
+    if (!orderCount) return;
+    const totalCount = cart.reduce((sum, item) => sum + item.count, 0);
+    orderCount.textContent = totalCount;
+};
+
+const renderCart = (container) => {
+    container.innerHTML = cart.map(item =>` 
+        <div class="order data-id="${item.id}">
+            <img src="${item.img}" alt="${item.title}">
             <div class="order-info">
                 <h4>${item.title}</h4>
-                <p id="price">$${item.price}</p>
+                <p id="size">Size: S</p>
+                <p id="price">$ ${item.price}</p>
+            </div>
+            <div class="order-counter">
+                <button id="delete"><i class="bi bi-trash"></i></button>
+                <div class="counter">
+                    <button id="decrement">-</button>
+                    <span id="counter">1</span>
+                    <button id="increment">+</button>
+                </div>
             </div>
         </div>
     `).join('');

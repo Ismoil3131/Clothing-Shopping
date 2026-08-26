@@ -87,7 +87,7 @@ body {
     position: relative;
 }
 
-.open-shop-card-btn::before {
+.order-count {
     z-index: 10;
     content: "0";
     position: absolute;
@@ -120,7 +120,7 @@ body {
     display: flex;
     justify-content: flex-end;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease;
 }
 
 .order-products .orders-wrapper {
@@ -180,9 +180,11 @@ body {
 .orders {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 10px;
     height: 90vh;
     padding: 20px 0;
+    overflow-y: auto;
+    overflow-x: hidden;
 
         img {
             width: 80px;
@@ -197,6 +199,7 @@ body {
             align-items: center;
             justify-content: space-between;
             gap: 30px;
+            border-bottom: 1px solid #e0e0e0;
 
 
             img {
@@ -270,30 +273,29 @@ body {
 
     }
 
-    .order-amount {
-        position:sticky;
-        bottom: ;
-        display: flex;
-        flex-direction: column;
-        border-top: 1px solid rgb(225, 225, 225);
+    
+}
+.order-amount {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgb(225, 225, 225);
 
-        #buy {
-            height: 40px;
-            background-color: black;
-            color: #ffffff;
-            border-radius: 8px;
-            border: none;
-        }
-
-        .price {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            margin: 20px;
-            gap: 10px;
-        }
-        
+    #buy {
+        height: 40px;
+        background-color: black;
+        color: #ffffff;
+        border-radius: 8px;
+        border: none;
     }
+
+    .price {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 20px;
+        gap: 10px;
+    }
+        
 }
 
 
@@ -399,7 +401,7 @@ body {
 
     #product-category{
         content: "";
-        z-index: 100;
+        z-index: 1;
         position: absolute;
         top: 0%;
         right: 0;
@@ -463,6 +465,10 @@ body {
         margin-top: 20px;
         gap: 10px; 
 
+        #rating {
+            color: #000000;
+            font-size: 18px;
+        }
 
 
         h2 {

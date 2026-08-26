@@ -2,9 +2,9 @@ import { addToCard } from "./moduls/addToCard.js";
 import { getProductsCard } from "./moduls/getProductsCard.js";
 import { getCategory } from "./moduls/getCategory.js";
 
-window.addEventListener('DOMContentLoaded', ()=> {
-    getProductsCard()
-    // addToCard()
+window.addEventListener('DOMContentLoaded', async ()=> {
+    const products = await getProductsCard();
+    addToCard(products);
 })
 
 
@@ -30,24 +30,7 @@ if (closeShopCardBtn && orderProducts) {
     });
 }
 
-// ываываы
 
-
-const counter = document.getElementById('counter');
-const increment = document.getElementById('increment');
-const decrement = document.getElementById('decrement');
-
-increment.addEventListener('click', () => {
-    let count = parseInt(counter.textContent) || 0;
-    counter.textContent = count + 1;
-});
-
-decrement.addEventListener('click', () => {
-    let count = parseInt(counter.textContent) || 0;
-    if (count > 1) { 
-        counter.textContent = count - 1;
-    }
-});
 
 
 
