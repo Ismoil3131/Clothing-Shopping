@@ -17,6 +17,10 @@ body {
     padding: 10px 15px;
 }
 
+.general-container {
+    height: 54dvh;
+}
+
 .header {
     width: 100%;
     border-bottom: 1px solid #e0e0e0; 
@@ -200,11 +204,12 @@ body {
             justify-content: space-between;
             gap: 30px;
             border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
 
 
             img {
                 object-fit: contain;
-                width: 100px;
+                max-width: 100px;
                 height: 100px;
             }
 
@@ -216,7 +221,7 @@ body {
                 gap: 10px;
             
 
-                #delete {
+                .delete {
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -300,7 +305,7 @@ body {
 
 
 .no-orders {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -308,6 +313,7 @@ body {
     color: #717182;
     height: 60vh;
     gap: 20px;
+    z-index: 100;
     
     i {
         font-size: 64px;
@@ -322,6 +328,17 @@ body {
     gap: 10px;
     padding: 20px 0;
 
+    .filter-btn {
+        white-space: nowrap;
+        padding: 8px 16px ;
+        border-radius: 8px;
+        background-color: #ffffff;
+        border: 0.5px solid #8f8f8f;
+        outline:rgba(255, 255, 255, 0.4);
+        text-transform: capitalize;
+        transition: 0.1s all ease-in-out;
+    }
+
     i {
         font-size: 20px;
         width: 30px;
@@ -334,31 +351,33 @@ body {
         color: #ffffff;
     }
 
-    button {
-        padding: 8px 16px ;
-        border-radius: 8px;
-        background-color: #ffffff;
-        border: 0.5px solid #8f8f8f;
-        outline:rgba(255, 255, 255, 0.4);
+    .bi {
+        display: flex;
+        align-items: center;
     }
 
     .bi-funnel {
         width: 30px;
         height: 30px;
-        align-items: center;
     }
 }
+
 .main {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
     gap: 20px;
 }
 
 .card-wrapper {
+    width: 100%;
     display: flex;
-    justify-content: start; 
+    justify-content: center; 
     flex-wrap: wrap;    
     gap: 20px;
+    /* column-gap: 40px;
+    row-gap: 30px; */
 }
 
 .no-products {
@@ -367,22 +386,41 @@ body {
     align-items: center;
     justify-content: center;
     height: 30vh;
-
-    p {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: larger;
-    }
 }
-
 
 #empty-card-products {
-    display: flex;
-    height: max-content;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+
+.loader-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 10px solid rgb(201, 201, 201);
+  border-bottom: 10px solid rgb(93, 93, 93);
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: spin 1s linear infinite;
+}
+
+#empty-card-products span {
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
 
 .card {
     display: flex;
@@ -462,7 +500,7 @@ body {
         justify-content: start;
         align-items:start;
         border-radius: 8px;
-        margin-top: 20px;
+        margin-top: 10px;
         gap: 10px; 
 
         #rating {
@@ -497,12 +535,9 @@ body {
     display: flex; 
     justify-content: space-around;
     align-items: center;
-    margin-top: 50px;
     border-top: 1px solid #e0e0e0;
     width: 100%;
-    padding: 15px 0;
-    
-
+    padding: 10px 0;
 }
 
 .footer-wrapper {
@@ -524,9 +559,10 @@ body {
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
-    gap: 50px;
+    height: max-content;
+    gap: 20px;
     width: 100%;
-    padding: 10px;
+    font-size: 0.8rem;
 
     p {
         max-width: 300px;
